@@ -5,21 +5,38 @@ import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import { useState } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import TransferStudentscreen from '../Students/Transfer Student Screen';
+import StudentList from '../Students/Student List Screen';
+import BasicSimpleTreeView from '../Components/Tree';
+import StudentAdd, { StudentFormData } from '../Students/Student Add';
+import ErrorComponent from '../Students/error'; 
+import img from '../basicpage/6565bd61-0fe6-459e-9ae4-69ead84c1fc4.png';
+import TeacherAdd from '../Teacher/Teacher Add';
+import Teacherlist from '../Teacher/Teacher List Screen';
+import TeacherAllocation from '../Teacher/Teacher Allocation Screen';
+import SubjectAdd from '../Subjects/Subject Add';
+import Subjectlist from '../Subjects/Subject List Screen';
+import Register from '../School/Registration';
+import SyllabusFrom from '../Syllabus/Syllabus Form';
+import Syllabuslist from '../Syllabus/Syllabus List Screen';
+import ClassFrom from '../Class/Class Form Screen';
+import Classlist from '../Class/Class List Screen';
+import Feestructure from '../Fees/Fee Structure Screen';
+import Feesubmission from '../Fees/Fee Submission Screen';
+import Feevoucher from '../Fees/Fee Voucher Screen';
+import Addmission from '../Admission/Admission Screen';
+import Examschedule from '../Exam/Exam Schedule Screen';
+import Examresult from '../Exam/Exam Result Screen';
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   open?: boolean;
@@ -65,14 +82,20 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
 
+const Logo = styled('img')({
+  width: '100px',
+  margin: '16px auto',
+  display: 'block',
+});
+
 export default function Dashboard() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(true);
+  const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -80,6 +103,11 @@ export default function Dashboard() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleStudentSubmit = (formData: StudentFormData) => {
+    console.log('Student added:', formData);
+    // Add logic to handle form submission, e.g., updating state, navigating to a different route, etc.
   };
 
   return (
@@ -119,62 +147,34 @@ export default function Dashboard() {
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
+        <Logo src={img} alt="Logo" />
         <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        <BasicSimpleTreeView />
         <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
       </Drawer>
       <Main open={open}>
-        <DrawerHeader />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        <Routes>
+          <Route path="/Dashboard/student-Add" element={<StudentAdd onSubmit={handleStudentSubmit} />} />
+          <Route path="/Dashboard/student-list" element={<StudentList />} />
+          <Route path="/Dashboard/Transfer-Student-Screen" element={<TransferStudentscreen />} />
+          <Route path="*" element={<ErrorComponent />} />
+          <Route path='/Dashboard/Teacher-Add' element={<TeacherAdd />}/>
+          <Route path='/Dashboard/Teacher-List-Screen' element={<Teacherlist />}/>
+          <Route path='/Dashboard/Teacher-Allocation-Screen' element={<TeacherAllocation />}/>
+          <Route path='/Dashboard/Subject-Add-Screen' element={<SubjectAdd />}/>
+          <Route path='/Dashboard/Subject-List-Screen' element={<Subjectlist />}/>
+          <Route path='/Dashboard/Registration-Screen' element={<Register />}/>
+          <Route path='/Dashboard/Syllabus-Form' element={<SyllabusFrom />}/>
+          <Route path='/Dashboard/Syllabus-List-Screen' element={<Syllabuslist />}/>
+          <Route path='/Dashboard/Class-Form-Screen' element={<ClassFrom />}/>
+          <Route path='/Dashboard/Class-List-Screen' element={<Classlist />}/>
+          <Route path='/Dashboard/Fee-Structure-Screen' element={<Feestructure />}/>
+          <Route path='/Dashboard/Fee-Submission-Screen' element={<Feesubmission />}/>
+          <Route path='/Dashboard/Fee-Voucher-Screen' element={<Feevoucher />}/>
+          <Route path='/Dashboard/Admission-Screen' element={<Addmission />}/>
+          <Route path='/Dashboard/Exam-Schedule-Screen' element={<Examschedule />}/>
+          <Route path='/Dashboard/Exam-Result-Screen' element={<Examresult />}/>
+        </Routes>
       </Main>
     </Box>
   );

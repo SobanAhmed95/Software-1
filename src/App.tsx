@@ -1,13 +1,15 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
-// import { Inputs } from './Components/Input';
-// import { Btn } from './Components/Button';
 import Dashboard from './basicpage/Dashboard';
+
 function App() {
   return (
-    <div className="App">
-       <Dashboard/>
-    </div>
+    <React.StrictMode>
+      <BrowserRouter>
+        <Dashboard />
+      </BrowserRouter>
+    </React.StrictMode>
   );
 }
 
