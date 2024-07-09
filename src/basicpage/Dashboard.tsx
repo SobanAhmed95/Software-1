@@ -16,7 +16,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import TransferStudentscreen from '../Students/Transfer Student Screen';
 import StudentList from '../Students/Student List Screen';
 import BasicSimpleTreeView from '../Components/Tree';
-import StudentAdd, { StudentFormData } from '../Students/Student Add';
+import StudentAdd from '../Students/Student Add';
 import ErrorComponent from '../Students/error'; 
 import img from '../basicpage/6565bd61-0fe6-459e-9ae4-69ead84c1fc4.png';
 import TeacherAdd from '../Teacher/Teacher Add';
@@ -105,10 +105,10 @@ export default function Dashboard() {
     setOpen(false);
   };
 
-  const handleStudentSubmit = (formData: StudentFormData) => {
-    console.log('Student added:', formData);
+  // const handleStudentSubmit = (formData: StudentFormData) => {
+  //   console.log('Student added:', formData);
     // Add logic to handle form submission, e.g., updating state, navigating to a different route, etc.
-  };
+  // };
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -154,7 +154,7 @@ export default function Dashboard() {
       </Drawer>
       <Main open={open}>
         <Routes>
-          <Route path="/Dashboard/student-Add" element={<StudentAdd onSubmit={handleStudentSubmit} />} />
+          <Route path="/Dashboard/student-Add" element={<StudentAdd/>} />
           <Route path="/Dashboard/student-list" element={<StudentList />} />
           <Route path="/Dashboard/Transfer-Student-Screen" element={<TransferStudentscreen />} />
           <Route path="*" element={<ErrorComponent />} />
