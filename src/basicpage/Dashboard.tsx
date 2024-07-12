@@ -12,7 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import TransferStudentscreen from '../Students/Transfer Student Screen';
 import StudentList from '../Students/Student List Screen';
 import BasicSimpleTreeView from '../Components/Tree';
@@ -96,6 +96,29 @@ export default function Dashboard() {
   const theme = useTheme();
   const [open, setOpen] = useState(true);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const routeNameMap: { [key: string]: string } = {
+    "/Dashboard/student-Add": "Add Student",
+    "/Dashboard/student-list": "Student List",
+    "/Dashboard/Transfer-Student-Screen": "Transfer Student",
+    "/Dashboard/Teacher-Add": "Add Teacher",
+    "/Dashboard/Teacher-List-Screen": "Teacher List",
+    "/Dashboard/Teacher-Allocation-Screen": "Teacher Allocation",
+    "/Dashboard/Subject-Add-Screen": "Add Subject",
+    "/Dashboard/Subject-List-Screen": "Subject List",
+    "/Dashboard/Registration-Screen": "Registration",
+    "/Dashboard/Syllabus-Form": "Syllabus Form",
+    "/Dashboard/Syllabus-List-Screen": "Syllabus List",
+    "/Dashboard/Class-Form-Screen": "Class Form",
+    "/Dashboard/Class-List-Screen": "Class List",
+    "/Dashboard/Fee-Structure-Screen": "Fee Structure",
+    "/Dashboard/Fee-Submission-Screen": "Fee Submission",
+    "/Dashboard/Fee-Voucher-Screen": "Fee Voucher",
+    "/Dashboard/Admission-Screen": "Admission",
+    "/Dashboard/Exam-Schedule-Screen": "Exam Schedule",
+    "/Dashboard/Exam-Result-Screen": "Exam Result",
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -105,10 +128,7 @@ export default function Dashboard() {
     setOpen(false);
   };
 
-  // const handleStudentSubmit = (formData: StudentFormData) => {
-  //   console.log('Student added:', formData);
-    // Add logic to handle form submission, e.g., updating state, navigating to a different route, etc.
-  // };
+  const pageName = routeNameMap[location.pathname] || "Dashboard";
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -125,7 +145,7 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Persistent drawer
+            {pageName}
           </Typography>
         </Toolbar>
       </AppBar>

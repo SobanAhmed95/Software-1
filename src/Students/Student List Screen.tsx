@@ -34,7 +34,6 @@ const StudentList: React.FC = () => {
 
     const unsubscribe = onValue(studentRef, (snapshot) => {
       const data = snapshot.val();
-      console.log(data);
       if (data) {
         setStudentData(data);
       } else {
